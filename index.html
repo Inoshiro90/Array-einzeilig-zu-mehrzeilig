@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Array Umwandlung</title>
+</head>
+<body>
+    <h2>Array Umwandlung</h2>
+    <label for="inputArray">Eingabe Array:</label>
+    <textarea id="inputArray" rows="5" cols="50"></textarea>
+    <br>
+    <button onclick="convertArray()">Umwandeln</button>
+    <button onclick="copyToClipboard()">In Zwischenablage kopieren</button>
+    <button onclick="clearInput()">Eingabefeld leeren</button>
+    <br>
+    <label for="outputArray">Ausgabe Array:</label>
+    <textarea id="outputArray" rows="10" cols="50" readonly></textarea>
+
+    <script>
+        function convertArray() {
+            const inputElement = document.getElementById('inputArray');
+            const outputElement = document.getElementById('outputArray');
+            
+            const inputText = inputElement.value;
+            const inputArray = JSON.parse(inputText);
+            
+            const outputText = "[\n" + inputArray.map(item => '\t"' + item + '",').join('\n') + "\n]";
+            outputElement.value = outputText;
+        }
+        
+        function copyToClipboard() {
+            const outputElement = document.getElementById('outputArray');
+            outputElement.select();
+            document.execCommand('copy');
+        }
+        
+        function clearInput() {
+            const inputElement = document.getElementById('inputArray');
+            inputElement.value = '';
+        }
+    </script>
+</body>
+</html>
